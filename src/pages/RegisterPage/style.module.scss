@@ -1,0 +1,30 @@
+%flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexBox {
+    @extend %flex;
+    align-items: center;
+    gap: 2rem;
+
+    form {
+        @extend %flex;
+
+        width: 100%;
+        
+        gap: 1.25rem;
+
+        & > div:last-child {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 1rem;
+            margin-top: 0.65rem;
+
+            @media (min-width: 475px){
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    }
+}

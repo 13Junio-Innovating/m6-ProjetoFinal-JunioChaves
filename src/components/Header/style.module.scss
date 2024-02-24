@@ -1,0 +1,28 @@
+.flexBox {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+
+    img{
+        max-width: 104px;
+    }
+
+    & > div {
+        min-width: clamp(0px, 100%, 450px);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    @media (min-width: 670px){
+        justify-content: space-between;
+
+        & > div {
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+    }
+}

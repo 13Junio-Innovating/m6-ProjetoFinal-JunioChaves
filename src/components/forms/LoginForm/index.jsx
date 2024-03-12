@@ -14,7 +14,7 @@ export const LoginForm = () => {
       register,
       handleSubmit,
       formState: { errors },
-      reset
+      // reset
    } = useForm({
       resolver: zodResolver(loginFormSchema),
    });
@@ -24,20 +24,22 @@ export const LoginForm = () => {
    const { userLogin } = useContext(UserContext);
 
    const submit = async (formData) => {
+      await userLogin(formData)
+
       console.log(formData);
-      try {
-         setLoading(true);
-         const { data } = await api.post("/amanhecer/login/", formData);  // Endpoint para login de usuário
-         console.log(data);
-         userLogin(formData, setLoading, reset); 
-      } catch (error) {
-         console.error(error);
-         if (error.response?.data === "Incorrect password") {
-            // Tratamento de erro
-         }
-      } finally {
-         setLoading(false);
-      }
+      // try {
+      //    setLoading(true);
+      //    const { data } = await api.post("/users/login/", formData);  // Endpoint para login de usuário
+      //    console.log(data);
+      //    userLogin(formData, setLoading, reset); 
+      // } catch (error) {
+      //    console.error(error);
+      //    if (error.response?.data === "Incorrect password") {
+      //       // Tratamento de erro
+      //    }
+      // } finally {
+      //    setLoading(false);
+      // }
    };
    return (
       <form onSubmit={handleSubmit(submit)}>
@@ -46,18 +48,19 @@ export const LoginForm = () => {
             type="email"
             {...register("email")}
             error={errors.email}
-            disabled={loading}
+            // disabled={loading}
          />
          <InputPassword
             label="Sua senha"
             {...register("password")}
             error={errors.password}
-            disabled={loading}
+            // disabled={loading}
          />
          <div>
             <Link className="link" to="/register" disabled={loading}>Cadastre-se</Link>
             <button className="btn outline" type="submit">
-               {loading ? "acessando..." : "Acessar Amanhecer"}
+               {/* {loading ? "acessando..." : "Acessar Amanhecer"} */}
+               Logar
             </button>
          </div>
       </form>

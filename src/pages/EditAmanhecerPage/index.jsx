@@ -18,10 +18,10 @@ export const EditAmanhecerPage = () => {
                <button
                   onClick={() => {
                      setEditingAmanhecer(null);
-                     navigate("/user");
+                     navigate("/users/id");
                   }}
                   className="link"
-                  to="/user"
+                  to="/users"
                >
                   <MdArrowBack /> voltar
                </button>
@@ -31,6 +31,6 @@ export const EditAmanhecerPage = () => {
          </main>
       </DefaultTemplate>
    ) : (
-      <Navigate to="/user" />
+      <Navigate to="/users" />
    );
 };

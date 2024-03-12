@@ -5,7 +5,7 @@ import { UserContext } from "../../../providers/UserContext";
 import { AmanhecerContext } from "../../../providers/AmanhecerContext";
 import styles from "./style.module.scss";
 
-export const AmanhecerCard = ({ amanhecer }) => {
+export const ContactCard = ({ amanhecer }) => {
    const { user } = useContext(UserContext);
 
    const navigate = useNavigate();
@@ -13,7 +13,7 @@ export const AmanhecerCard = ({ amanhecer }) => {
    const { deleteAmanhecer, setEditingAmanheder } = useContext(AmanhecerContext);
 
    return (
-      <li className={styles.amanhecerCard}>
+      <li className={styles.contactCard}>
          <div>
             <span className="paragraph">
                <strong>{amanhecer.author}</strong> {amanhecer.email}

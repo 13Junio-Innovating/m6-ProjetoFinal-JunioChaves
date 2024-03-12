@@ -8,7 +8,7 @@ export const Footer = () => {
             <div className={styles.flexBox}>
                <img src={Logo} alt="Logo Amanhecer" />
                <p className="paragraph white">
-                  &copy; Todos os direitos reservados - Amanhecer
+                  &copy; Todos os direitos reservados - Junio Chaves
                </p>
             </div>
          </div>

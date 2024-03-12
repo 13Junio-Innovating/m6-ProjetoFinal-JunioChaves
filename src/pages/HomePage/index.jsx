@@ -1,7 +1,7 @@
 import { LoginForm } from "../../components/forms/LoginForm";
 import pageStyles from "../../styles/modules/pageBox.module.scss";
 import styles from "./style.module.scss";
-import Logo from "../../assets/Logo.svg";
+import Logo from "../../assets/Logo.jpg";
 
 export const HomePage = () => {
    return (

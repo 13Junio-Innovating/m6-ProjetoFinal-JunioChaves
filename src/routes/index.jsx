@@ -17,9 +17,9 @@ export const RoutesMain = () => {
          </Route>
 
          <Route element={<PrivateRoutes />}>
-            <Route path="/user" element={<UserPage />} />
-            <Route path="/user/create" element={<CreateAmanhecerPage />} /> 
-            <Route path="/user/edit" element={<EditAmanhecerPage />} />
+            <Route path="/users" element={<UserPage />} />
+            <Route path="/users/create" element={<CreateAmanhecerPage />} /> 
+            <Route path="/users/edit" element={<EditAmanhecerPage />} />
          </Route>
 
          <Route path="*" element={<ErrorPage />} />

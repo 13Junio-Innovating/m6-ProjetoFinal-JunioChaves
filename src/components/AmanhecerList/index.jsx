@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
 import { AmanhecerContext } from "../../providers/AmanhecerContext"
-import { AmanhecerCard } from "./AmanhecerCard";
+import { ContactCard } from "./AmanhecerCard/index";
 import styles from "./style.module.scss";
 
 export const AmanhecerList = () => {
@@ -10,11 +10,11 @@ export const AmanhecerList = () => {
         <section className={styles.amanhecerListSection}>
             <div>
                 <h1 className="title">Lista de recado</h1>
-                <Link className="btn solid" to="/user/create">Deixar recado</Link>
+                <Link className="btn solid" to="/users/create">Deixar recado</Link>
             </div>
             <ul>
                 {amanhecerList.map(amanhecer => (
-                    <AmanhecerCard key={amanhecer.id} amanhecer={amanhecer} />
+                    <ContactCard key={amanhecer.id} amanhecer={amanhecer} />
                 ))}
             </ul>
         </section>

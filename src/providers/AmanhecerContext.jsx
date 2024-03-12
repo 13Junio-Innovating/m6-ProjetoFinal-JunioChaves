@@ -7,6 +7,8 @@ import { api } from "../services/api";
 
 export const AmanhecerContext = createContext({});
 
+// localStorage.setItem("userId", response.data.userId);
+
 export const AmanhecerProvider = ({ children }) => {
    const { user } = useContext(UserContext);
 
@@ -18,7 +20,8 @@ export const AmanhecerProvider = ({ children }) => {
    useEffect(() => {
       const getAmanhecer = async () => {
          try {
-            const { data } = await api.get("/amanhecer"); 
+            const { data } = await api.get(`/contact/${id}`); 
+            console.log('cheguei aqui', data);
             setAmanhecerList(data);
          } catch (error) {
             console.log(error);
@@ -26,12 +29,10 @@ export const AmanhecerProvider = ({ children }) => {
       };
       getAmanhecer();
    }, []);
-
-   // erro rota /amanhecer
    
    const createAmanhecer = async (formData) => {
       try {
-         const token = localStorage.getItem("@TOKEN");
+         const token = localStorage.getItem("TOKEN");
 
          const newAmanhecer = {
             author: user.name,
@@ -41,7 +42,7 @@ export const AmanhecerProvider = ({ children }) => {
          };
 
          //Atualizando o servidor (back-end)
-         const { data } = await api.post("/amanhecer", newAmanhecer, {
+         const { data } = await api.post(`/contact/${id}`, newAmanhecer, {
             headers: {
                Authorization: `Bearer ${token}`,
             },
@@ -52,7 +53,7 @@ export const AmanhecerProvider = ({ children }) => {
 
          toast.success("Adicionado com sucesso!");
 
-         navigate("/user"); 
+         navigate(`/contact/${id}`); 
       } catch (error) {
          console.log(error);
       }
@@ -60,9 +61,9 @@ export const AmanhecerProvider = ({ children }) => {
 
    const deleteAmanhecer = async (deletingId) => {
       try {
-         const token = localStorage.getItem("@TOKEN");
+         const token = localStorage.getItem("TOKEN");
 
-         await api.delete(`/amanhecer/${deletingId}`, {
+         await api.delete(`/contact/${deletingId}`, {
             headers: {
                Authorization: `Bearer ${token}`
             }
@@ -78,9 +79,9 @@ export const AmanhecerProvider = ({ children }) => {
 
    const editAmanhecer = async (formData) => {
       try {
-         const token = localStorage.getItem("@TOKEN");
+         const token = localStorage.getItem("TOKEN");
          
-         const { data } = await api.patch(`/amanhecer/${editingAmanhecer.id}`, formData, {
+         const { data } = await api.patch(`/contact/${editingAmanhecer.id}`, formData, {
             headers: {
                Authorization: `Bearer ${token}`,
             },

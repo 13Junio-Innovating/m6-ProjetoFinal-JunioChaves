@@ -17,22 +17,24 @@ export const RegisterForm = () => {
       resolver: zodResolver(registerFormSchema),
    });
 
-   const [loading, setLoading] = useState(false);
+   // const [loading, setLoading] = useState(false);
   
    const { userRegister } = useContext(UserContext);
 
    const submit = async (formData) => {
-      console.log(formData);
-      try {
-         setLoading(true);
-         await api.post("/amanhecer/users/", formData);  // Endpoint para registro de usuário
-         console.log(formData);
-         userRegister(formData, setLoading);
-      } catch (error) {
-         console.error(error);
-      } finally {
-         setLoading(false);
-      }
+      await userRegister(formData)
+
+      // console.log(formData);
+      // try {
+      //    setLoading(true);
+      //    await api.post("/users/register", formData);  // Endpoint para registro de usuário
+      //    // console.log(api);
+      //    userRegister(formData, setLoading);
+      // } catch (error) {
+      //    console.error(error);
+      // } finally {
+      //    setLoading(false);
+      // }
    };
 
    return (
@@ -42,7 +44,7 @@ export const RegisterForm = () => {
             type="text"
             {...register("name")}
             error={errors.name}
-            disabled={loading}
+         
          />
 
          <Input
@@ -50,31 +52,121 @@ export const RegisterForm = () => {
             type="email"
             {...register("email")}
             error={errors.email}
-            disabled={loading}
+         
          />
 
          <InputPassword
             label="Crie uma senha"
             {...register("password")}
             error={errors.password}
-            disabled={loading}
+         
          />
 
          <InputPassword
-            label="Crie uma senha"
+            label="Confirme a senha"
             {...register("confirmPassword")}
             error={errors.confirmPassword}
-            disabled={loading}
+         
          />
 
+         <Input
+            label="Seu número de telefone"
+            type="text"
+            {...register("phones")}
+            error={errors.phones}
+         
+         />
+
+         {/* <Input
+            label="Seu e-mail alternativo"
+            type="email"
+            {...register("alternateEmail")}
+            error={errors.alternateEmail}
+            disabled={loading}
+         /> */}
+
          <div>
-            <Link className="link" to="/">
+            <Link className="link" to="/users/login">
                Login
             </Link>
-            <button className="btn outline" disabled={!isValid || !isDirty}>
-               {loading ? "Cadastrando..." : "Cadastrar"}
+            <button type="submit" className="btn outline" >
+               {/* {loading ? "Cadastrando..." : "Cadastrar"} */}
+               Cadastrar
             </button>
          </div>
       </form>
    );
 };
+
+
+
+// export const RegisterForm = () => {
+//    const {
+//       register,
+//       handleSubmit,
+//       formState: { errors, isValid, isDirty },
+//    } = useForm({      
+//       resolver: zodResolver(registerFormSchema),
+//    });
+
+//    const [loading, setLoading] = useState(false);
+  
+//    const { userRegister } = useContext(UserContext);
+
+//    const submit = async (formData) => {
+//       console.log(formData);
+//       try {
+//          setLoading(true);
+//          await api.post("/amanhecer/users/", formData);  // Endpoint para registro de usuário
+//          console.log(formData);
+//          userRegister(formData, setLoading);
+//       } catch (error) {
+//          console.error(error);
+//       } finally {
+//          setLoading(false);
+//       }
+//    };
+
+//    return (
+//       <form onSubmit={handleSubmit(submit)}>
+//          <Input
+//             label="Seu nome"
+//             type="text"
+//             {...register("name")}
+//             error={errors.name}
+//             disabled={loading}
+//          />
+
+//          <Input
+//             label="Seu e-mail"
+//             type="email"
+//             {...register("email")}
+//             error={errors.email}
+//             disabled={loading}
+//          />
+
+//          <InputPassword
+//             label="Crie uma senha"
+//             {...register("password")}
+//             error={errors.password}
+//             disabled={loading}
+//          />
+
+//          <InputPassword
+//             label="Crie uma senha"
+//             {...register("confirmPassword")}
+//             error={errors.confirmPassword}
+//             disabled={loading}
+//          />
+
+//          <div>
+//             <Link className="link" to="/">
+//                Login
+//             </Link>
+//             <button className="btn outline" disabled={!isValid || !isDirty}>
+//                {loading ? "Cadastrando..." : "Cadastrar"}
+//             </button>
+//          </div>
+//       </form>
+//    );
+// };

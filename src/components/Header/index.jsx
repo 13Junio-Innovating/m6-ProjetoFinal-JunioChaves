@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Logo from "../../assets/Logo.svg";
+import Logo from "../../assets/Logo.jpg";
 import styles from "./style.module.scss";
 import { UserContext } from "../../providers/UserContext";
 
@@ -15,6 +15,7 @@ export const Header = () => {
                   <div>
                      <p className="paragraph">{user?.name}</p>
                      <p className="paragraph">{user?.email}</p>
+                     <p className="paragraph">{user?.phone}</p>
                   </div>
 
                   <button className="btn outline" onClick={() => userLogout()}>

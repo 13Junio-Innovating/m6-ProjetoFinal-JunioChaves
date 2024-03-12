@@ -6,7 +6,7 @@ import { api } from "../services/api";
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-   const [user, setUser] = useState(null);
+   const [user, setUser] = useState();
    const [loading, setLoading] = useState(false);
 
    const { state } = useLocation();
@@ -17,8 +17,8 @@ export const UserProvider = ({ children }) => {
    const pathname = window.location.pathname;
 
    useEffect(() => {
-      const token = localStorage.getItem("@TOKEN");
-      const userId = localStorage.getItem("@USERID");      
+      const token = localStorage.getItem("TOKEN");
+      const userId = localStorage.getItem("userId"); 
 
       const getUser = async () => {
          try{
@@ -33,7 +33,7 @@ export const UserProvider = ({ children }) => {
          } catch (error) {
             console.log(error);
          } finally {
-            setLoading(false);
+            // setLoading(false);
          }
       }
 
@@ -41,33 +41,21 @@ export const UserProvider = ({ children }) => {
          getUser();
       }
    }, [])
-
-   const userLogin = async (formData, setLoading, reset) => {
-      try {
-         setLoading(true);
-         const { data } = await api.post("/api/amanhecer/login/", formData);
-         // const { data } = await api.post("/login", formData);
-         console.log(data);
-         setUser(data.user);
-         localStorage.setItem("@TOKEN", data.accessToken);
-         localStorage.setItem("@USERID", data.user.id);
-         reset();
-         navigate(state?.lastRoute ? state.lastRoute : pathname);
-      } catch (error) {
-         console.log(error);
-         if (error.response?.data === "Incorrect password") {
-            toast.error("O e-mail e a senha não correspondem.");
-         }
-      } finally {
-         setLoading(false);
-      }
+   
+   const userLogin = async (formData) => {
+      const response = await api.post("/users/login", formData);
+      setUser(response.data);
+      localStorage.setItem("TOKEN", response.data.token);
+      localStorage.setItem("userId", response.data.userId);
+      navigate(state?.lastRoute ? state.lastRoute : pathname);
    };
+   
 
-   const userRegister = async (formData, setLoading) => {
+   const userRegister = async (formData) => {
       try {
-         setLoading(true);
-         await api.post("/api/amanhecer/users/", formData); 
-         // await api.post("/users", formData);
+         // setLoading(true);
+         const response = await api.post("/users/register", formData); 
+         setUser(response.formData)
          navigate("/");
          toast.success("Cadastro realizado com sucesso!");
       } catch (error) {
@@ -76,20 +64,20 @@ export const UserProvider = ({ children }) => {
             toast.error("Usuário já cadastrado");
          }
       } finally {
-         setLoading(false);
+         // setLoading(false);
       }
    };
 
    const userLogout = () => {
       setUser(null);
       navigate("/");
-      localStorage.removeItem("@TOKEN");
-      localStorage.removeItem("@USERID");
+      localStorage.removeItem("TOKEN");
+      localStorage.removeItem("userId");
       toast.warning("Deslogando...")
    };
 
    return (
-      <UserContext.Provider value={{ loading, user, userLogin, userRegister, userLogout }}>
+      <UserContext.Provider value={{ user, userLogin, userRegister, userLogout }}>
          {children}
       </UserContext.Provider>
    );

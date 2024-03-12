@@ -9,10 +9,10 @@ export const CreateAmanhecerPage = () => {
       <DefaultTemplate>
          <main className={styles.createAmanhecerPage}>
             <div className="container sm">
-               <Link className="link" to="/user">
+               <Link className="link" to="/users">
                   <MdArrowBack /> voltar
                </Link>
-               <h1 className="title center">Deixe um scrap</h1>
+               <h1 className="title center">Deixe um recado</h1>
                <CreateAmanhecerForm />
             </div>
          </main>

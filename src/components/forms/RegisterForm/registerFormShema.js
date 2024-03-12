@@ -11,7 +11,9 @@ export const registerFormSchema = z.object({
       .regex(/[a-z]+/, "É necessário conter pelo menos uma letra minúscula")
       .regex(/[0-9]+/, "É necessário pelo menos um número")
       .regex(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/]/, "É necessário pelo menos um caracter especial."),
-    confirmPassword: z.string().nonempty("Confirmar a senha é obrigatória") 
+    confirmPassword: z.string().nonempty("Confirmar a senha é obrigatória"),
+    phones: z.string().min(10, "O número de telefone deve ter no mínimo 10 dígitos").max(20, "O número de telefone deve ter no máximo 20 dígitos"),
+    // alternateEmail: z.string().email("Forneça um e-mail válido como alternativa"),
 }).refine(({password, confirmPassword}) => password === confirmPassword, {
     message: "As senhas não correspondem",
     path: ["confirmPassword"]

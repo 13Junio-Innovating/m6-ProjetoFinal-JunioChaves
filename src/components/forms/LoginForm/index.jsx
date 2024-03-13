@@ -26,20 +26,6 @@ export const LoginForm = () => {
    const submit = async (formData) => {
       await userLogin(formData)
 
-      console.log(formData);
-      // try {
-      //    setLoading(true);
-      //    const { data } = await api.post("/users/login/", formData);  // Endpoint para login de usuário
-      //    console.log(data);
-      //    userLogin(formData, setLoading, reset); 
-      // } catch (error) {
-      //    console.error(error);
-      //    if (error.response?.data === "Incorrect password") {
-      //       // Tratamento de erro
-      //    }
-      // } finally {
-      //    setLoading(false);
-      // }
    };
    return (
       <form onSubmit={handleSubmit(submit)}>
@@ -60,7 +46,7 @@ export const LoginForm = () => {
             <Link className="link" to="/register" disabled={loading}>Cadastre-se</Link>
             <button className="btn outline" type="submit">
                {/* {loading ? "acessando..." : "Acessar Amanhecer"} */}
-               Logar
+               Entrar
             </button>
          </div>
       </form>

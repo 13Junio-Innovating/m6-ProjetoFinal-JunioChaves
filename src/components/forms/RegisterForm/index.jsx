@@ -22,19 +22,8 @@ export const RegisterForm = () => {
    const { userRegister } = useContext(UserContext);
 
    const submit = async (formData) => {
-      await userRegister(formData)
-
-      // console.log(formData);
-      // try {
-      //    setLoading(true);
-      //    await api.post("/users/register", formData);  // Endpoint para registro de usuário
-      //    // console.log(api);
-      //    userRegister(formData, setLoading);
-      // } catch (error) {
-      //    console.error(error);
-      // } finally {
-      //    setLoading(false);
-      // }
+      await userRegister(formData);
+      navigator("/users/login");
    };
 
    return (
@@ -76,14 +65,6 @@ export const RegisterForm = () => {
             error={errors.phones}
          
          />
-
-         {/* <Input
-            label="Seu e-mail alternativo"
-            type="email"
-            {...register("alternateEmail")}
-            error={errors.alternateEmail}
-            disabled={loading}
-         /> */}
 
          <div>
             <Link className="link" to="/users/login">

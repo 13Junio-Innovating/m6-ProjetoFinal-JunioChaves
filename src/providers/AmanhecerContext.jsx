@@ -20,8 +20,7 @@ export const AmanhecerProvider = ({ children }) => {
    useEffect(() => {
       const getAmanhecer = async () => {
          try {
-            const { data } = await api.get(`/contact/${id}`); 
-            console.log('cheguei aqui', data);
+            const { data } = await api.get(`/contact/${userid}`); 
             setAmanhecerList(data);
          } catch (error) {
             console.log(error);

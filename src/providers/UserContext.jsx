@@ -46,7 +46,9 @@ export const UserProvider = ({ children }) => {
       const response = await api.post("/users/login", formData);
       setUser(response.data);
       localStorage.setItem("TOKEN", response.data.token);
+
       localStorage.setItem("userId", response.data.userId);
+
       navigate(state?.lastRoute ? state.lastRoute : pathname);
    };
    

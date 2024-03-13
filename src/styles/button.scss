@@ -42,6 +42,11 @@
         cursor: not-allowed;
         opacity: .5;
     }
+
+    &:close{
+        gap: 5px;
+        margin-right: 40px;
+    }
 }
 
 .link {

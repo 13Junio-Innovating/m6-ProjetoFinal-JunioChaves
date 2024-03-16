@@ -7,7 +7,6 @@ export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
    const [user, setUser] = useState();
-   const [loading, setLoading] = useState(false);
 
    const { state } = useLocation();
 
@@ -22,7 +21,6 @@ export const UserProvider = ({ children }) => {
 
       const getUser = async () => {
          try{
-            setLoading(true);
             const { data } = await api.get(`/users/${userId}`, {
                headers: {
                   Authorization: `Bearer ${token}`
@@ -32,8 +30,6 @@ export const UserProvider = ({ children }) => {
             navigate(pathname);
          } catch (error) {
             console.log(error);
-         } finally {
-            // setLoading(false);
          }
       }
 
@@ -45,17 +41,16 @@ export const UserProvider = ({ children }) => {
    const userLogin = async (formData) => {
       const response = await api.post("/users/login", formData);
       setUser(response.data);
-      localStorage.setItem("TOKEN", response.data.token);
-
-      localStorage.setItem("userId", response.data.userId);
-
+   
+      const {token, userId} = response.data.token;
+      window.localStorage.setItem("TOKEN", token);
+      window.localStorage.setItem("userId", userId);
       navigate(state?.lastRoute ? state.lastRoute : pathname);
    };
    
 
    const userRegister = async (formData) => {
       try {
-         // setLoading(true);
          const response = await api.post("/users/register", formData); 
          setUser(response.formData)
          navigate("/");
@@ -65,9 +60,7 @@ export const UserProvider = ({ children }) => {
          if (error.response?.data === "Email already exists") {
             toast.error("Usuário já cadastrado");
          }
-      } finally {
-         // setLoading(false);
-      }
+      } 
    };
 
    const userLogout = () => {
